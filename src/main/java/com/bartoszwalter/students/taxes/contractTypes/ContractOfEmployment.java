@@ -2,48 +2,43 @@ package com.bartoszwalter.students.taxes.contractTypes;
 
 import com.bartoszwalter.students.taxes.TaxCalculator.TaxCalculator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ContractOfEmployment extends ContractConstants implements ContractType {
 
-    public void printContractInfoToConsole() {
+    Map valuesMap = new HashMap<String, String>();
 
-        System.out.println("UMOWA O PRACĘ");
-        System.out.println("Podstawa wymiaru składek " + podstawa);
+    public Map getValuesMap() {
+        return valuesMap;
+    }
+
+    public void calculateContractRates() {
         double oPodstawa = TaxCalculator.obliczPodstawe(podstawa);
-        System.out.println("Składka na ubezpieczenie emerytalne "
-                + twoDecimalPlacesFormat.format(s_emerytalna));
-        System.out.println("Składka na ubezpieczenie rentowe    "
-                + twoDecimalPlacesFormat.format(s_rentowa));
-        System.out.println("Składka na ubezpieczenie chorobowe  "
-                + twoDecimalPlacesFormat.format(u_chorobowe));
-        System.out.println("Podstawa wymiaru składki na ubezpieczenie zdrowotne: "
-                + oPodstawa);
         TaxCalculator.obliczUbezpieczenia(oPodstawa);
-        System.out.println("Składka na ubezpieczenie zdrowotne: 9% = "
-                + twoDecimalPlacesFormat.format(s_zdrow1) + " 7,75% = " + twoDecimalPlacesFormat.format(s_zdrow2));
-        System.out.println("Koszty uzyskania przychodu w stałej wysokości "
-                + kosztyUzyskania);
         double podstawaOpodat = oPodstawa - kosztyUzyskania;
-        double podstawaOpodat0 = Double
-                .parseDouble(zeroDecimalPlacesFormat.format(podstawaOpodat));
-        System.out.println("Podstawa opodatkowania " + podstawaOpodat
-                + " zaokrąglona " + zeroDecimalPlacesFormat.format(podstawaOpodat0));
+        double podstawaOpodat0 = Double.parseDouble(zeroDecimalPlacesFormat.format(podstawaOpodat));
         TaxCalculator.obliczPodatek(podstawaOpodat0);
-        System.out.println("Zaliczka na podatek dochodowy 18 % = "
-                + zaliczkaNaPod);
-        System.out.println("Kwota wolna od podatku = " + kwotaZmiejsz);
         double podatekPotracony = zaliczkaNaPod - kwotaZmiejsz;
-        System.out.println("Podatek potrącony = "
-                + twoDecimalPlacesFormat.format(podatekPotracony));
         TaxCalculator.obliczZaliczke();
         zaliczkaUS0 = Double.parseDouble(zeroDecimalPlacesFormat.format(zaliczkaUS));
-        System.out.println("Zaliczka do urzędu skarbowego = "
-                + twoDecimalPlacesFormat.format(zaliczkaUS) + " po zaokrągleniu = "
-                + zeroDecimalPlacesFormat.format(zaliczkaUS0));
-        double wynagrodzenie = podstawa
-                - ((s_emerytalna + s_rentowa + u_chorobowe) + s_zdrow1 + zaliczkaUS0);
-        System.out.println();
-        System.out
-                .println("Pracownik otrzyma wynagrodzenie netto w wysokości = "
-                        + twoDecimalPlacesFormat.format(wynagrodzenie));
+        double wynagrodzenie = podstawa - ((s_emerytalna + s_rentowa + u_chorobowe) + s_zdrow1 + zaliczkaUS0);
+
+        valuesMap.put("typUmowy", "UMOWA O PRACĘ");
+        valuesMap.put("podstawa", podstawa);
+        valuesMap.put("s_emerytalna", twoDecimalPlacesFormat.format(s_emerytalna));
+        valuesMap.put("s_rentowa", twoDecimalPlacesFormat.format(s_rentowa));
+        valuesMap.put("u_chorobowe", twoDecimalPlacesFormat.format(u_chorobowe));
+        valuesMap.put("oPodstawa", twoDecimalPlacesFormat.format(oPodstawa));
+        valuesMap.put("s_zdrow1", twoDecimalPlacesFormat.format(s_zdrow1));
+        valuesMap.put("s_zdrow2", twoDecimalPlacesFormat.format(s_zdrow2));
+        valuesMap.put("kosztyUzyskania", twoDecimalPlacesFormat.format(kosztyUzyskania));
+        valuesMap.put("podstawaOpodat", podstawaOpodat);
+        valuesMap.put("podstawaOpodat0", zeroDecimalPlacesFormat.format(podstawaOpodat0));
+        valuesMap.put("zaliczkaNaPod", zaliczkaNaPod);
+        valuesMap.put("podatekPotracony", twoDecimalPlacesFormat.format(podatekPotracony));
+        valuesMap.put("zaliczkaUS", twoDecimalPlacesFormat.format(zaliczkaUS));
+        valuesMap.put("zaliczkaUS0", zeroDecimalPlacesFormat.format(zaliczkaUS0));
+        valuesMap.put("wynagrodzenie", twoDecimalPlacesFormat.format(wynagrodzenie));
     }
 }
