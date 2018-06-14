@@ -1,27 +1,26 @@
 package com.bartoszwalter.students.taxes.TaxCalculator;
 
-import com.bartoszwalter.students.taxes.contractTypes.ContractConstants;
+import com.bartoszwalter.students.taxes.Constants.ContractConstants;
 
 public class TaxCalculator {
 
-    public static void obliczZaliczke() {
-        ContractConstants.zaliczkaUS = ContractConstants.zaliczkaNaPod - ContractConstants.s_zdrow2 - ContractConstants.kwotaZmiejsz;
+    public static void countAdvance() {
+        ContractConstants.advanceUS = ContractConstants.incomeTaxAdvance - ContractConstants.healthContribution2 - ContractConstants.taxDecresingAmount;
     }
 
-    public static void obliczPodatek(double podstawa) {
-        ContractConstants.zaliczkaNaPod = (podstawa * 18) / 100;
+    public static void countTax(double base) {
+        ContractConstants.incomeTaxAdvance = (base * 18) / 100;
     }
 
-    public static double obliczPodstawe(double podstawa) {
-        ContractConstants.s_emerytalna = (podstawa * 9.76) / 100;
-        ContractConstants.s_rentowa = (podstawa * 1.5) / 100;
-        ContractConstants.u_chorobowe = (podstawa * 2.45) / 100;
-        return (podstawa - ContractConstants.s_emerytalna - ContractConstants.s_rentowa - ContractConstants.u_chorobowe);
+    public static double countBase(double base) {
+        ContractConstants.pensionContribution = (base * 9.76) / 100;
+        ContractConstants.rentContribution = (base * 1.5) / 100;
+        ContractConstants.healthInsurance = (base * 2.45) / 100;
+        return (base - ContractConstants.pensionContribution - ContractConstants.rentContribution - ContractConstants.healthInsurance);
     }
 
-    public static void obliczUbezpieczenia(double podstawa) {
-        ContractConstants.s_zdrow1 = (podstawa * 9) / 100;
-        ContractConstants.s_zdrow2 = (podstawa * 7.75) / 100;
+    public static void countInsurance(double base) {
+        ContractConstants.healthContribution1 = (base * 9) / 100;
+        ContractConstants.healthContribution2 = (base * 7.75) / 100;
     }
-
 }

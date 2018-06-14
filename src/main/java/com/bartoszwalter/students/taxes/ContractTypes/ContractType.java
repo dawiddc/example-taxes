@@ -1,4 +1,4 @@
-package com.bartoszwalter.students.taxes.contractTypes;
+package com.bartoszwalter.students.taxes.ContractTypes;
 
 import java.util.Map;
 

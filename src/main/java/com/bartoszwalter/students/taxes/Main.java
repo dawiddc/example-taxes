@@ -1,9 +1,9 @@
 package com.bartoszwalter.students.taxes;
 
-import com.bartoszwalter.students.taxes.contractTypes.ContractAgreement;
-import com.bartoszwalter.students.taxes.contractTypes.ContractConstants;
-import com.bartoszwalter.students.taxes.contractTypes.ContractOfEmployment;
-import com.bartoszwalter.students.taxes.contractTypes.ContractType;
+import com.bartoszwalter.students.taxes.Constants.ContractConstants;
+import com.bartoszwalter.students.taxes.ContractTypes.ContractAgreement;
+import com.bartoszwalter.students.taxes.ContractTypes.ContractOfEmployment;
+import com.bartoszwalter.students.taxes.ContractTypes.ContractType;
 import com.bartoszwalter.students.taxes.utils.ResultPrinter;
 
 import java.io.BufferedReader;
@@ -35,7 +35,7 @@ class Main {
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         System.out.print("Podaj kwotę dochodu: ");
         try {
-            ContractConstants.podstawa = Double.parseDouble(bufferedReader.readLine());
+            ContractConstants.base = Double.parseDouble(bufferedReader.readLine());
         } catch (IOException ex) {
             System.out.println("Niepoprawna kwota dochodu");
             System.err.println(ex);
